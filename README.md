@@ -1,2 +1,2 @@
-# DS_MLProjects
+# DS/ML Projects
 Projects from my education
