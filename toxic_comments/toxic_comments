@@ -1,0 +1,1773 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<img src=\"http://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/waving-hand.png\" align=left width=44, heigth=44>\n",
+    "<div class=\"alert alert-info\">\n",
+    "<b> Комментарий ревьюера</b>\n",
+    "\n",
+    "\n",
+    "Привет, Дмитрий! Давай знакомиться! Меня зовут Дмитрий Махортов, и я буду проверять твой проект. Сразу предлагаю общение на «ты» 🙂, но если тебе это не комфортно, то дай знать, и мы перейдем на «вы». \n",
+    "\n",
+    "Моя основная цель — не указать на совершенные тобою ошибки, а поделиться своим опытом и помочь тебе погрузиться в увлекательный мир работы с данными и вырасти в крепкого профи. Это отдаленная цель. А ближайшая - сделать твою работу еще лучше )).\n",
+    "   \n",
+    "    \n",
+    "Все ключевые этапы в работе выполнены, и я вижу что с проектом ты справшяешься. Есть моменты, которые нужно доработать, но я уверен, у тебя все получится.\n",
+    "        \n",
+    "Расскажу как обычно проходит проверка:    \n",
+    "Бывают моменты, которые требуют пристального внимания. Комментарии по ним выделены <span style='background-color:#F7B3A4'> красным цветом </span> и обозначены значком 🛑. После их доработки проект будет принят.  🙂\n",
+    " \n",
+    "<span style='background-color:#B7EBA7'> Зеленым цветом </span> и значком ✅ отмечены удачные и элегантные решения, на которые можно опираться в будущих проектах. Или советы «со звездочкой», которые помогут тебе в будущем.\n",
+    "\n",
+    "<span style='background-color:#F9EDA6'>Жёлтым цветом </span> и значком ⚠️ выделено то, что в следующий раз можно сделать по-другому. Ты можешь учесть эти комментарии при выполнении будущих заданий или доработать проект сейчас (однако это не обязательно).\n",
+    "\n",
+    "Давай работать над проектом в диалоге: **если ты что-то меняешь в проекте по моим рекомендациям — пиши об этом**. Выбери для своих комментариев какой-то заметный цвет, так мне будет легче отследить изменения. Пожалуйста, **не перемещай, не изменяй и не удаляй мои комментарии**. Всё это поможет выполнить повторную проверку твоего проекта оперативнее. \n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<div class=\"alert\" style=\"background-color:#ead7f7;color:#8737bf\">\n",
+    "    <font size=\"3\"><b>образец комментария студента</b></font>\n",
+    "   \n",
+    "Можешь использовать этот комментарий. Просто удали этот текст и вместо него напиши свой 🙂\n",
+    "\n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<div class=\"alert\" style=\"background-color:#ead7f7;color:#8737bf\">\n",
+    "    <font size=\"3\"><b> Комментарий студента🤓</b></font>\n",
+    "   \n",
+    "Привет!\n",
+    "    Заранее спасибо за проделанную работу по ревью моего проекта!\n",
+    "    Надеюсь я не подарил тебе порцию испанского стыда!)))\n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {
+    "toc": true
+   },
+   "source": [
+    "<h1>Содержание<span class=\"tocSkip\"></span></h1>\n",
+    "<div class=\"toc\"><ul class=\"toc-item\"><li><span><a href=\"#Введение\" data-toc-modified-id=\"Введение-1\"><span class=\"toc-item-num\">1&nbsp;&nbsp;</span>Введение</a></span><ul class=\"toc-item\"><li><span><a href=\"#План-работы\" data-toc-modified-id=\"План-работы-1.1\"><span class=\"toc-item-num\">1.1&nbsp;&nbsp;</span>План работы</a></span></li></ul></li><li><span><a href=\"#Подготовка\" data-toc-modified-id=\"Подготовка-2\"><span class=\"toc-item-num\">2&nbsp;&nbsp;</span>Подготовка</a></span><ul class=\"toc-item\"><li><span><a href=\"#Загрузка-данных\" data-toc-modified-id=\"Загрузка-данных-2.1\"><span class=\"toc-item-num\">2.1&nbsp;&nbsp;</span>Загрузка данных</a></span></li><li><span><a href=\"#Предобработка-данных\" data-toc-modified-id=\"Предобработка-данных-2.2\"><span class=\"toc-item-num\">2.2&nbsp;&nbsp;</span>Предобработка данных</a></span></li><li><span><a href=\"#Подготовка-данных-для-обучения-модели\" data-toc-modified-id=\"Подготовка-данных-для-обучения-модели-2.3\"><span class=\"toc-item-num\">2.3&nbsp;&nbsp;</span>Подготовка данных для обучения модели</a></span><ul class=\"toc-item\"><li><span><a href=\"#Подготовка-текстов-для-модели-линейной-регрессии\" data-toc-modified-id=\"Подготовка-текстов-для-модели-линейной-регрессии-2.3.1\"><span class=\"toc-item-num\">2.3.1&nbsp;&nbsp;</span>Подготовка текстов для модели линейной регрессии</a></span></li><li><span><a href=\"#Подготовка-текстов-для-модели-решающего-дерева-и-градиентного-бустинга\" data-toc-modified-id=\"Подготовка-текстов-для-модели-решающего-дерева-и-градиентного-бустинга-2.3.2\"><span class=\"toc-item-num\">2.3.2&nbsp;&nbsp;</span>Подготовка текстов для модели решающего дерева и градиентного бустинга</a></span></li></ul></li></ul></li><li><span><a href=\"#Обучение\" data-toc-modified-id=\"Обучение-3\"><span class=\"toc-item-num\">3&nbsp;&nbsp;</span>Обучение</a></span><ul class=\"toc-item\"><li><ul class=\"toc-item\"><li><span><a href=\"#Модель-логистической-регрессии\" data-toc-modified-id=\"Модель-логистической-регрессии-3.0.1\"><span class=\"toc-item-num\">3.0.1&nbsp;&nbsp;</span>Модель логистической регрессии</a></span></li><li><span><a href=\"#Модель-случайного-дерева\" data-toc-modified-id=\"Модель-случайного-дерева-3.0.2\"><span class=\"toc-item-num\">3.0.2&nbsp;&nbsp;</span>Модель случайного дерева</a></span></li><li><span><a href=\"#Модель-градиентного-бустинга-LightGBM\" data-toc-modified-id=\"Модель-градиентного-бустинга-LightGBM-3.0.3\"><span class=\"toc-item-num\">3.0.3&nbsp;&nbsp;</span>Модель градиентного бустинга LightGBM</a></span></li><li><span><a href=\"#Вывод-по-итогам-обучения\" data-toc-modified-id=\"Вывод-по-итогам-обучения-3.0.4\"><span class=\"toc-item-num\">3.0.4&nbsp;&nbsp;</span>Вывод по итогам обучения</a></span></li></ul></li><li><span><a href=\"#Тестирование-модели\" data-toc-modified-id=\"Тестирование-модели-3.1\"><span class=\"toc-item-num\">3.1&nbsp;&nbsp;</span>Тестирование модели</a></span></li></ul></li><li><span><a href=\"#Выводы\" data-toc-modified-id=\"Выводы-4\"><span class=\"toc-item-num\">4&nbsp;&nbsp;</span>Выводы</a></span></li><li><span><a href=\"#Чек-лист-проверки\" data-toc-modified-id=\"Чек-лист-проверки-5\"><span class=\"toc-item-num\">5&nbsp;&nbsp;</span>Чек-лист проверки</a></span></li></ul></div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Проект для «Викишоп»"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Интернет-магазин «Викишоп» запускает новый сервис. Теперь пользователи могут редактировать и дополнять описания товаров, как в вики-сообществах. То есть клиенты предлагают свои правки и комментируют изменения других. Магазину нужен инструмент, который будет искать токсичные комментарии и отправлять их на модерацию. \n",
+    "\n",
+    "Обучите модель классифицировать комментарии на позитивные и негативные. В вашем распоряжении набор данных с разметкой о токсичности правок.\n",
+    "\n",
+    "Постройте модель со значением метрики качества *F1* не меньше 0.75. \n",
+    "\n",
+    "**Инструкция по выполнению проекта**\n",
+    "\n",
+    "1. Загрузите и подготовьте данные.\n",
+    "2. Обучите разные модели. \n",
+    "3. Сделайте выводы.\n",
+    "\n",
+    "Для выполнения проекта применять *BERT* необязательно, но вы можете попробовать.\n",
+    "\n",
+    "**Описание данных**\n",
+    "\n",
+    "Данные находятся в файле `toxic_comments.csv`. Столбец *text* в нём содержит текст комментария, а *toxic* — целевой признак."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Введение"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Целью проекта является выбрать и обучить модель для классификации комментариев (позитивные/негативные) со значением метрики качества F1 не менее 0.75."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "При выполнении проекта сравним модели с помощью TF-IDF, c помощью языковых представлений без и с использованием BERT."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### План работы"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Работа будет выполняться согласно следующего плана:\n",
+    "- загрузка и предобработка данных\n",
+    "- подготовка данных для обучения моделей\n",
+    "- обучение моделей с различными гиперпараметрами и выбор оптимальной методом кросс-валидации\n",
+    "- тестирование модели на тестовой выборке и оценка ее адекватности"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Requirement already satisfied: spacy in /opt/conda/lib/python3.9/site-packages (3.2.0)\n",
+      "Requirement already satisfied: cymem<2.1.0,>=2.0.2 in /opt/conda/lib/python3.9/site-packages (from spacy) (2.0.6)\n",
+      "Requirement already satisfied: spacy-legacy<3.1.0,>=3.0.8 in /opt/conda/lib/python3.9/site-packages (from spacy) (3.0.10)\n",
+      "Requirement already satisfied: blis<0.8.0,>=0.4.0 in /opt/conda/lib/python3.9/site-packages (from spacy) (0.7.8)\n",
+      "Requirement already satisfied: spacy-loggers<2.0.0,>=1.0.0 in /opt/conda/lib/python3.9/site-packages (from spacy) (1.0.3)\n",
+      "Requirement already satisfied: preshed<3.1.0,>=3.0.2 in /opt/conda/lib/python3.9/site-packages (from spacy) (3.0.7)\n",
+      "Requirement already satisfied: pydantic!=1.8,!=1.8.1,<1.9.0,>=1.7.4 in /opt/conda/lib/python3.9/site-packages (from spacy) (1.8.2)\n",
+      "Requirement already satisfied: langcodes<4.0.0,>=3.2.0 in /opt/conda/lib/python3.9/site-packages (from spacy) (3.3.0)\n",
+      "Requirement already satisfied: typer<0.5.0,>=0.3.0 in /opt/conda/lib/python3.9/site-packages (from spacy) (0.4.2)\n",
+      "Requirement already satisfied: pathy>=0.3.5 in /opt/conda/lib/python3.9/site-packages (from spacy) (0.6.2)\n",
+      "Requirement already satisfied: thinc<8.1.0,>=8.0.12 in /opt/conda/lib/python3.9/site-packages (from spacy) (8.0.17)\n",
+      "Requirement already satisfied: setuptools in /opt/conda/lib/python3.9/site-packages (from spacy) (49.6.0.post20210108)\n",
+      "Requirement already satisfied: srsly<3.0.0,>=2.4.1 in /opt/conda/lib/python3.9/site-packages (from spacy) (2.4.4)\n",
+      "Requirement already satisfied: wasabi<1.1.0,>=0.8.1 in /opt/conda/lib/python3.9/site-packages (from spacy) (0.10.1)\n",
+      "Requirement already satisfied: numpy>=1.15.0 in /opt/conda/lib/python3.9/site-packages (from spacy) (1.21.1)\n",
+      "Requirement already satisfied: packaging>=20.0 in /opt/conda/lib/python3.9/site-packages (from spacy) (21.3)\n",
+      "Requirement already satisfied: murmurhash<1.1.0,>=0.28.0 in /opt/conda/lib/python3.9/site-packages (from spacy) (1.0.8)\n",
+      "Requirement already satisfied: tqdm<5.0.0,>=4.38.0 in /opt/conda/lib/python3.9/site-packages (from spacy) (4.61.2)\n",
+      "Requirement already satisfied: catalogue<2.1.0,>=2.0.6 in /opt/conda/lib/python3.9/site-packages (from spacy) (2.0.8)\n",
+      "Requirement already satisfied: jinja2 in /opt/conda/lib/python3.9/site-packages (from spacy) (3.0.1)\n",
+      "Requirement already satisfied: requests<3.0.0,>=2.13.0 in /opt/conda/lib/python3.9/site-packages (from spacy) (2.25.1)\n",
+      "Requirement already satisfied: pyparsing!=3.0.5,>=2.0.2 in /opt/conda/lib/python3.9/site-packages (from packaging>=20.0->spacy) (2.4.7)\n",
+      "Requirement already satisfied: smart-open<6.0.0,>=5.2.1 in /opt/conda/lib/python3.9/site-packages (from pathy>=0.3.5->spacy) (5.2.1)\n",
+      "Requirement already satisfied: typing-extensions>=3.7.4.3 in /opt/conda/lib/python3.9/site-packages (from pydantic!=1.8,!=1.8.1,<1.9.0,>=1.7.4->spacy) (4.3.0)\n",
+      "Requirement already satisfied: chardet<5,>=3.0.2 in /opt/conda/lib/python3.9/site-packages (from requests<3.0.0,>=2.13.0->spacy) (4.0.0)\n",
+      "Requirement already satisfied: urllib3<1.27,>=1.21.1 in /opt/conda/lib/python3.9/site-packages (from requests<3.0.0,>=2.13.0->spacy) (1.26.6)\n",
+      "Requirement already satisfied: certifi>=2017.4.17 in /opt/conda/lib/python3.9/site-packages (from requests<3.0.0,>=2.13.0->spacy) (2022.6.15)\n",
+      "Requirement already satisfied: idna<3,>=2.5 in /opt/conda/lib/python3.9/site-packages (from requests<3.0.0,>=2.13.0->spacy) (2.10)\n",
+      "Requirement already satisfied: click<9.0.0,>=7.1.1 in /opt/conda/lib/python3.9/site-packages (from typer<0.5.0,>=0.3.0->spacy) (8.1.3)\n",
+      "Requirement already satisfied: MarkupSafe>=2.0 in /opt/conda/lib/python3.9/site-packages (from jinja2->spacy) (2.1.1)\n",
+      "\u001b[38;5;3m⚠ As of spaCy v3.0, shortcuts like 'en' are deprecated. Please use the\n",
+      "full pipeline package name 'en_core_web_sm' instead.\u001b[0m\n",
+      "Collecting en-core-web-sm==3.2.0\n",
+      "  Downloading https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.2.0/en_core_web_sm-3.2.0-py3-none-any.whl (13.9 MB)\n",
+      "\u001b[K     |████████████████████████████████| 13.9 MB 1.2 MB/s eta 0:00:01\n",
+      "\u001b[?25hRequirement already satisfied: spacy<3.3.0,>=3.2.0 in /opt/conda/lib/python3.9/site-packages (from en-core-web-sm==3.2.0) (3.2.0)\n",
+      "Requirement already satisfied: requests<3.0.0,>=2.13.0 in /opt/conda/lib/python3.9/site-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (2.25.1)\n",
+      "Requirement already satisfied: setuptools in /opt/conda/lib/python3.9/site-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (49.6.0.post20210108)\n",
+      "Requirement already satisfied: typer<0.5.0,>=0.3.0 in /opt/conda/lib/python3.9/site-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (0.4.2)\n",
+      "Requirement already satisfied: langcodes<4.0.0,>=3.2.0 in /opt/conda/lib/python3.9/site-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (3.3.0)\n",
+      "Requirement already satisfied: pydantic!=1.8,!=1.8.1,<1.9.0,>=1.7.4 in /opt/conda/lib/python3.9/site-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (1.8.2)\n",
+      "Requirement already satisfied: pathy>=0.3.5 in /opt/conda/lib/python3.9/site-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (0.6.2)\n",
+      "Requirement already satisfied: packaging>=20.0 in /opt/conda/lib/python3.9/site-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (21.3)\n",
+      "Requirement already satisfied: srsly<3.0.0,>=2.4.1 in /opt/conda/lib/python3.9/site-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (2.4.4)\n",
+      "Requirement already satisfied: numpy>=1.15.0 in /opt/conda/lib/python3.9/site-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (1.21.1)\n",
+      "Requirement already satisfied: spacy-legacy<3.1.0,>=3.0.8 in /opt/conda/lib/python3.9/site-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (3.0.10)\n",
+      "Requirement already satisfied: spacy-loggers<2.0.0,>=1.0.0 in /opt/conda/lib/python3.9/site-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (1.0.3)\n",
+      "Requirement already satisfied: catalogue<2.1.0,>=2.0.6 in /opt/conda/lib/python3.9/site-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (2.0.8)\n",
+      "Requirement already satisfied: tqdm<5.0.0,>=4.38.0 in /opt/conda/lib/python3.9/site-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (4.61.2)\n",
+      "Requirement already satisfied: jinja2 in /opt/conda/lib/python3.9/site-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (3.0.1)\n",
+      "Requirement already satisfied: cymem<2.1.0,>=2.0.2 in /opt/conda/lib/python3.9/site-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (2.0.6)\n",
+      "Requirement already satisfied: wasabi<1.1.0,>=0.8.1 in /opt/conda/lib/python3.9/site-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (0.10.1)\n",
+      "Requirement already satisfied: preshed<3.1.0,>=3.0.2 in /opt/conda/lib/python3.9/site-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (3.0.7)\n",
+      "Requirement already satisfied: blis<0.8.0,>=0.4.0 in /opt/conda/lib/python3.9/site-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (0.7.8)\n",
+      "Requirement already satisfied: thinc<8.1.0,>=8.0.12 in /opt/conda/lib/python3.9/site-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (8.0.17)\n",
+      "Requirement already satisfied: murmurhash<1.1.0,>=0.28.0 in /opt/conda/lib/python3.9/site-packages (from spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (1.0.8)\n",
+      "Requirement already satisfied: pyparsing!=3.0.5,>=2.0.2 in /opt/conda/lib/python3.9/site-packages (from packaging>=20.0->spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (2.4.7)\n",
+      "Requirement already satisfied: smart-open<6.0.0,>=5.2.1 in /opt/conda/lib/python3.9/site-packages (from pathy>=0.3.5->spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (5.2.1)\n",
+      "Requirement already satisfied: typing-extensions>=3.7.4.3 in /opt/conda/lib/python3.9/site-packages (from pydantic!=1.8,!=1.8.1,<1.9.0,>=1.7.4->spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (4.3.0)\n",
+      "Requirement already satisfied: certifi>=2017.4.17 in /opt/conda/lib/python3.9/site-packages (from requests<3.0.0,>=2.13.0->spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (2022.6.15)\n",
+      "Requirement already satisfied: urllib3<1.27,>=1.21.1 in /opt/conda/lib/python3.9/site-packages (from requests<3.0.0,>=2.13.0->spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (1.26.6)\n",
+      "Requirement already satisfied: idna<3,>=2.5 in /opt/conda/lib/python3.9/site-packages (from requests<3.0.0,>=2.13.0->spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (2.10)\n",
+      "Requirement already satisfied: chardet<5,>=3.0.2 in /opt/conda/lib/python3.9/site-packages (from requests<3.0.0,>=2.13.0->spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (4.0.0)\n",
+      "Requirement already satisfied: click<9.0.0,>=7.1.1 in /opt/conda/lib/python3.9/site-packages (from typer<0.5.0,>=0.3.0->spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (8.1.3)\n",
+      "Requirement already satisfied: MarkupSafe>=2.0 in /opt/conda/lib/python3.9/site-packages (from jinja2->spacy<3.3.0,>=3.2.0->en-core-web-sm==3.2.0) (2.1.1)\n",
+      "\u001b[38;5;2m✔ Download and installation successful\u001b[0m\n",
+      "You can now load the package via spacy.load('en_core_web_sm')\n",
+      "Requirement already satisfied: gensim in /opt/conda/lib/python3.9/site-packages (4.1.2)\n",
+      "Requirement already satisfied: smart-open>=1.8.1 in /opt/conda/lib/python3.9/site-packages (from gensim) (5.2.1)\n",
+      "Requirement already satisfied: scipy>=0.18.1 in /opt/conda/lib/python3.9/site-packages (from gensim) (1.9.1)\n",
+      "Requirement already satisfied: numpy>=1.17.0 in /opt/conda/lib/python3.9/site-packages (from gensim) (1.21.1)\n"
+     ]
+    }
+   ],
+   "source": [
+    "!pip install -q gensim"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<img src=\"https://upload.wikimedia.org/wikipedia/commons/b/ba/Warning_sign_4.0.png\" align=left width=44, heigth=33>\n",
+    "<div class=\"alert alert-warning\">\n",
+    "    \n",
+    "    \n",
+    "На мой взгляд стоит убрать установку spacy и скачивание весов из кода.  Возможно её не было  в твоем окружении, но установка библиотеки в локальное окружение выполняется только один раз. \n",
+    "    \n",
+    "А в стандартное окружение Практикума эта библиотека уже входит. \n",
+    "    \n",
+    "\n",
+    "А вот gensim действительно нужно установать. Только советую если ты все-таки используешь библиотеку, установка которой необходима, использовать флаг -q, уменьшит количество логов.    \n",
+    "    \n",
+    "    \n",
+    "    !pip install -q gensim\n",
+    "\n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<div class=\"alert\" style=\"background-color:#ead7f7;color:#8737bf\">\n",
+    "    <font size=\"3\"><b> Комментарий студента🤓</b></font>\n",
+    "   \n",
+    "Да, несмотря на то, что я устанавливал окружение Практикума, почему-то не было. Исправил!\n",
+    "    Спасибо большое за совет с количеством логов🙏🏼\n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<img src=\"https://emojigraph.org/media/apple/check-mark-button_2705.png\" align=left width=33, heigth=33>\n",
+    "<div class=\"alert alert-success\">\n",
+    "    <b>v2</b>  Да, я замечал, похоже в окружении Практикума библиотек больше, чем указано в допматериалах. Можно самому вывести их если набрать \n",
+    "\n",
+    "    !pip list\n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "[nltk_data] Downloading package stopwords to /home/jovyan/nltk_data...\n",
+      "[nltk_data]   Package stopwords is already up-to-date!\n",
+      "[nltk_data] Downloading package punkt to /home/jovyan/nltk_data...\n",
+      "[nltk_data]   Package punkt is already up-to-date!\n"
+     ]
+    }
+   ],
+   "source": [
+    "import os\n",
+    "\n",
+    "import pandas as pd\n",
+    "import numpy as np\n",
+    "import re\n",
+    "\n",
+    "import spacy\n",
+    "import nltk\n",
+    "nltk.download('stopwords')\n",
+    "nltk.download('punkt')\n",
+    "from nltk.corpus import stopwords\n",
+    "from nltk.tokenize import word_tokenize\n",
+    "\n",
+    "from tqdm.notebook import tqdm\n",
+    "\n",
+    "import gensim.downloader as api\n",
+    "from gensim.models import Word2Vec\n",
+    "\n",
+    "from sklearn.experimental import enable_halving_search_cv\n",
+    "from sklearn.pipeline import Pipeline\n",
+    "from sklearn.model_selection import train_test_split, RandomizedSearchCV, GridSearchCV, HalvingRandomSearchCV\n",
+    "from sklearn.feature_extraction.text import TfidfVectorizer\n",
+    "from sklearn.linear_model import LogisticRegression\n",
+    "from sklearn.ensemble import RandomForestClassifier\n",
+    "from sklearn.metrics import f1_score\n",
+    "\n",
+    "import lightgbm as lgb"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<img src=\"https://emojigraph.org/media/apple/check-mark-button_2705.png\" align=left width=33, heigth=33>\n",
+    "<div class=\"alert alert-success\">\n",
+    "Отлично, все нужные библиотеки импортированы в начале ноутбука.Это хорошая практика.</div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Подготовка"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Загрузка данных"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "tqdm.pandas()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "local_path = 'toxic_comments.csv'\n",
+    "server_path = '/datasets/toxic_comments.csv'"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "if os.path.exists(local_path):\n",
+    "    data = pd.read_csv(local_path)\n",
+    "else:\n",
+    "    data = pd.read_csv(server_path)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<img src=\"https://emojigraph.org/media/apple/check-mark-button_2705.png\" align=left width=33, heigth=33>\n",
+    "<div class=\"alert alert-success\">\n",
+    " 👍 </div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Предобработка данных"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Для начала, рассмотрим имеющийся датасет."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "<class 'pandas.core.frame.DataFrame'>\n",
+      "RangeIndex: 159292 entries, 0 to 159291\n",
+      "Data columns (total 3 columns):\n",
+      " #   Column      Non-Null Count   Dtype \n",
+      "---  ------      --------------   ----- \n",
+      " 0   Unnamed: 0  159292 non-null  int64 \n",
+      " 1   text        159292 non-null  object\n",
+      " 2   toxic       159292 non-null  int64 \n",
+      "dtypes: int64(2), object(1)\n",
+      "memory usage: 3.6+ MB\n",
+      "None\n"
+     ]
+    },
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>Unnamed: 0</th>\n",
+       "      <th>text</th>\n",
+       "      <th>toxic</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>0</td>\n",
+       "      <td>Explanation\\nWhy the edits made under my usern...</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>1</td>\n",
+       "      <td>D'aww! He matches this background colour I'm s...</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>2</td>\n",
+       "      <td>Hey man, I'm really not trying to edit war. It...</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>3</td>\n",
+       "      <td>\"\\nMore\\nI can't make any real suggestions on ...</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>4</td>\n",
+       "      <td>You, sir, are my hero. Any chance you remember...</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>5</td>\n",
+       "      <td>\"\\n\\nCongratulations from me as well, use the ...</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>6</th>\n",
+       "      <td>6</td>\n",
+       "      <td>COCKSUCKER BEFORE YOU PISS AROUND ON MY WORK</td>\n",
+       "      <td>1</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>7</th>\n",
+       "      <td>7</td>\n",
+       "      <td>Your vandalism to the Matt Shirvington article...</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>8</th>\n",
+       "      <td>8</td>\n",
+       "      <td>Sorry if the word 'nonsense' was offensive to ...</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>9</th>\n",
+       "      <td>9</td>\n",
+       "      <td>alignment on this subject and which are contra...</td>\n",
+       "      <td>0</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "   Unnamed: 0                                               text  toxic\n",
+       "0           0  Explanation\\nWhy the edits made under my usern...      0\n",
+       "1           1  D'aww! He matches this background colour I'm s...      0\n",
+       "2           2  Hey man, I'm really not trying to edit war. It...      0\n",
+       "3           3  \"\\nMore\\nI can't make any real suggestions on ...      0\n",
+       "4           4  You, sir, are my hero. Any chance you remember...      0\n",
+       "5           5  \"\\n\\nCongratulations from me as well, use the ...      0\n",
+       "6           6       COCKSUCKER BEFORE YOU PISS AROUND ON MY WORK      1\n",
+       "7           7  Your vandalism to the Matt Shirvington article...      0\n",
+       "8           8  Sorry if the word 'nonsense' was offensive to ...      0\n",
+       "9           9  alignment on this subject and which are contra...      0"
+      ]
+     },
+     "execution_count": 5,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "print(data.info())\n",
+    "data.head(10)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Как видно из представленной выше информации, в датасете есть три столбца - `Unnamed: 0`, повторяющий индекс, `text` - текст комментария, `toxic` - категориальный признак, описывающий, является ли комментарий негативным.\n",
+    "Всего в датасете представлено почти 160 000 объектов.\n",
+    "Пропуски в датасете отсутствуют.\n",
+    "\n",
+    "Проверим датасет на наличие дубликатов."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "0"
+      ]
+     },
+     "execution_count": 6,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "data.duplicated().sum()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Дубликатов нет."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<img src=\"https://emojigraph.org/media/apple/check-mark-button_2705.png\" align=left width=33, heigth=33>\n",
+    "<div class=\"alert alert-success\">\n",
+    "Данные загружены и исследованы.</div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Удалим ненужный столбец, повторяющий индекс."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "data = data.drop('Unnamed: 0', axis=1)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<img src=\"https://emojigraph.org/media/apple/check-mark-button_2705.png\" align=left width=33, heigth=33>\n",
+    "<div class=\"alert alert-success\">\n",
+    "    \n",
+    "Да, все верно, столбец `'Unnamed: 0'` можно безболезненно удалить. Это \"старый\" индекс, который похоже забыли при пересохранении датасета.</div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Подготовка данных для обучения модели "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Начнем с подготовки текстов для дальнейшего обучения.\n",
+    "Для начала очистим текст от знаков препинания и стоп-слов, а так же лемматизируем имеющиеся в тексте слова."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "nlp = spacy.load('en_core_web_sm', disable=['parser', 'ner'])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "del_n = re.compile('\\n')\n",
+    "clean_text = re.compile(\"(?!')[\\W\\d]+|(?![\\w])' \")\n",
+    "\n",
+    "stopwords_list = list(stopwords.words('english'))\n",
+    "\n",
+    "def clean(text):\n",
+    "    text = del_n.sub(' ', str(text).lower())\n",
+    "    res_text = clean_text.sub(' ', text)\n",
+    "    return res_text\n",
+    "\n",
+    "def del_stopwords(text):\n",
+    "    clean_tokens = tuple(\n",
+    "        map( lambda x: x if x not in stopwords_list else '', word_tokenize(text) )\n",
+    "    )\n",
+    "    res_text = ' '.join(clean_tokens)\n",
+    "    return res_text\n",
+    "\n",
+    "def lemmatize(text):    \n",
+    "    doc = nlp(text)\n",
+    "    lemms = ' '.join([token.lemma_ for token in doc])\n",
+    "    return lemms\n",
+    "\n",
+    "def prepare(text):\n",
+    "    clean_text = clean(text)\n",
+    "    no_sw_text = del_stopwords(clean_text)\n",
+    "    lemm_text = lemmatize(no_sw_text)\n",
+    "    return lemm_text"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "data['text_lemms'] = data['text'].progress_apply(prepare)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<img src=\"https://emojigraph.org/media/apple/check-mark-button_2705.png\" align=left width=33, heigth=33>\n",
+    "<div class=\"alert alert-success\"> \n",
+    "\n",
+    "Молодец, что используешь spacy, а также отлключил лишние операции. Это заметно ускоряет процесс лемматизации.\n",
+    "\n",
+    "    \n",
+    "    \n",
+    "Кстати, есть еще один способ ускорить лемматизацию. \n",
+    "    \n",
+    "Можно использовать spaCy pipeline (https://spacy.io/usage/processing-pipelines)\n",
+    "    \n",
+    "    \n",
+    "    lemm_texts = []\n",
+    "    total = data.shape[0]\n",
+    "    nlp_pipe = nlp.pipe(data['text'].values, disable = ['ner', 'parser'])\n",
+    "    \n",
+    "    for doc in tqdm(nlp_pipe, total=total):\n",
+    "        lemm_text = \" \".join([token.lemma_ for token in doc])    \n",
+    "        lemm_texts.append(lemm_text) \n",
+    "    \n",
+    "Когда я проверял, у меня получилось ускорить почти в два раза.</div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<div class=\"alert\" style=\"background-color:#ead7f7;color:#8737bf\">\n",
+    "    <font size=\"3\"><b> Комментарий студента🤓</b></font>\n",
+    "   \n",
+    "Обязательно учту!\n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<img src=\"https://emojigraph.org/media/apple/check-mark-button_2705.png\" align=left width=33, heigth=33>\n",
+    "<div class=\"alert alert-success\">\n",
+    "    <b>v2</b> 👍 </div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<img src=\"https://upload.wikimedia.org/wikipedia/commons/b/ba/Warning_sign_4.0.png\" align=left width=44, heigth=33>\n",
+    "<div class=\"alert alert-warning\">\n",
+    "\n",
+    "Правильная лемматизация длится долго... Минут 20-30, в зависимости от мощности компьютера. Гораздо комфортнее видеть прогресс выполнения этой длительной операции, чем сидеть и гадать \"а не зависла ли она\", \"закончит только к утру или через 30 секунд\"? Можно воспользоваться прогресс -баром от tqdm.\n",
+    "    \n",
+    "     \n",
+    "    from tqdm.notebook import tqdm\n",
+    "    tqdm.pandas()\n",
+    "\n",
+    "    data['lemm_text'] = data['text'].progress_apply(lemmafunction)\n",
+    "    \n",
+    "    \n",
+    "    \n",
+    "    \n",
+    "</div>\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<div class=\"alert\" style=\"background-color:#ead7f7;color:#8737bf\">\n",
+    "    <font size=\"3\"><b> Комментарий студента🤓</b></font>\n",
+    "Исправил!\n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<img src=\"https://emojigraph.org/media/apple/check-mark-button_2705.png\" align=left width=33, heigth=33>\n",
+    "<div class=\"alert alert-success\">\n",
+    "    <b>v2</b> 👍 </div>"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/html": [
+       "<div>\n",
+       "<style scoped>\n",
+       "    .dataframe tbody tr th:only-of-type {\n",
+       "        vertical-align: middle;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe tbody tr th {\n",
+       "        vertical-align: top;\n",
+       "    }\n",
+       "\n",
+       "    .dataframe thead th {\n",
+       "        text-align: right;\n",
+       "    }\n",
+       "</style>\n",
+       "<table border=\"1\" class=\"dataframe\">\n",
+       "  <thead>\n",
+       "    <tr style=\"text-align: right;\">\n",
+       "      <th></th>\n",
+       "      <th>text</th>\n",
+       "      <th>toxic</th>\n",
+       "      <th>text_lemms</th>\n",
+       "    </tr>\n",
+       "  </thead>\n",
+       "  <tbody>\n",
+       "    <tr>\n",
+       "      <th>0</th>\n",
+       "      <td>Explanation\\nWhy the edits made under my usern...</td>\n",
+       "      <td>0</td>\n",
+       "      <td>explanation    edit make    username hardcore ...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>1</th>\n",
+       "      <td>D'aww! He matches this background colour I'm s...</td>\n",
+       "      <td>0</td>\n",
+       "      <td>d'aww   match   background colour   ' m seemin...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>2</th>\n",
+       "      <td>Hey man, I'm really not trying to edit war. It...</td>\n",
+       "      <td>0</td>\n",
+       "      <td>hey man   ' m really   try   edit war   's    ...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>3</th>\n",
+       "      <td>\"\\nMore\\nI can't make any real suggestions on ...</td>\n",
+       "      <td>0</td>\n",
+       "      <td>can not make   real suggestion   improvemen...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>4</th>\n",
+       "      <td>You, sir, are my hero. Any chance you remember...</td>\n",
+       "      <td>0</td>\n",
+       "      <td>sir    hero   chance   remember   page   's</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>5</th>\n",
+       "      <td>\"\\n\\nCongratulations from me as well, use the ...</td>\n",
+       "      <td>0</td>\n",
+       "      <td>congratulation     well use   tool well talk</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>6</th>\n",
+       "      <td>COCKSUCKER BEFORE YOU PISS AROUND ON MY WORK</td>\n",
+       "      <td>1</td>\n",
+       "      <td>cocksucker    piss around    work</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>7</th>\n",
+       "      <td>Your vandalism to the Matt Shirvington article...</td>\n",
+       "      <td>0</td>\n",
+       "      <td>vandalism    matt shirvington article    rev...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>8</th>\n",
+       "      <td>Sorry if the word 'nonsense' was offensive to ...</td>\n",
+       "      <td>0</td>\n",
+       "      <td>sorry    word nonsense   offensive    anyway  ...</td>\n",
+       "    </tr>\n",
+       "    <tr>\n",
+       "      <th>9</th>\n",
+       "      <td>alignment on this subject and which are contra...</td>\n",
+       "      <td>0</td>\n",
+       "      <td>alignment    subject     contrary     dulithgow</td>\n",
+       "    </tr>\n",
+       "  </tbody>\n",
+       "</table>\n",
+       "</div>"
+      ],
+      "text/plain": [
+       "                                                text  toxic  \\\n",
+       "0  Explanation\\nWhy the edits made under my usern...      0   \n",
+       "1  D'aww! He matches this background colour I'm s...      0   \n",
+       "2  Hey man, I'm really not trying to edit war. It...      0   \n",
+       "3  \"\\nMore\\nI can't make any real suggestions on ...      0   \n",
+       "4  You, sir, are my hero. Any chance you remember...      0   \n",
+       "5  \"\\n\\nCongratulations from me as well, use the ...      0   \n",
+       "6       COCKSUCKER BEFORE YOU PISS AROUND ON MY WORK      1   \n",
+       "7  Your vandalism to the Matt Shirvington article...      0   \n",
+       "8  Sorry if the word 'nonsense' was offensive to ...      0   \n",
+       "9  alignment on this subject and which are contra...      0   \n",
+       "\n",
+       "                                          text_lemms  \n",
+       "0  explanation    edit make    username hardcore ...  \n",
+       "1  d'aww   match   background colour   ' m seemin...  \n",
+       "2  hey man   ' m really   try   edit war   's    ...  \n",
+       "3     can not make   real suggestion   improvemen...  \n",
+       "4        sir    hero   chance   remember   page   's  \n",
+       "5       congratulation     well use   tool well talk  \n",
+       "6                  cocksucker    piss around    work  \n",
+       "7    vandalism    matt shirvington article    rev...  \n",
+       "8  sorry    word nonsense   offensive    anyway  ...  \n",
+       "9    alignment    subject     contrary     dulithgow  "
+      ]
+     },
+     "execution_count": 11,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "data.head(10)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Выделим целевой признак и признак, по которому будет проводиться обучение и дальнейшее предсказывание."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "features = data['text_lemms']\n",
+    "target = data['toxic']"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Разделим выборку на тренировочную и тестовую. Для того, чтобы большее количество текстов было использовано при обучении, оставим для теста 10%."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "features_train, features_test, target_train, target_test =\\\n",
+    "train_test_split(features, target, test_size = 0.1)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<img src=\"https://emojigraph.org/media/apple/check-mark-button_2705.png\" align=left width=33, heigth=33>\n",
+    "<div class=\"alert alert-success\">\n",
+    "    \n",
+    "Данные разделены на выборки. Но я бы посоветовал тебе изменить пропорции и выделить на тест 10%. Причина простая - модели, которые мы обучаем чувствительны к объему обучающих данных. Чем больше слов они увидят в процессе обучения, и оценят их вклад в \"токсичность\", тем лучше будут модели. А для корректного тестирования и 10% данных вполне достаточно, учитывая немаленький размер датасета.\n",
+    "\n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<div class=\"alert\" style=\"background-color:#ead7f7;color:#8737bf\">\n",
+    "    <font size=\"3\"><b> Комментарий студента🤓</b></font>\n",
+    "   \n",
+    "Исправил\n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<img src=\"https://emojigraph.org/media/apple/check-mark-button_2705.png\" align=left width=33, heigth=33>\n",
+    "<div class=\"alert alert-success\">\n",
+    "    <b>v2</b> Но размер почему-то по прежнему 0,25 </div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#### Подготовка текстов для модели линейной регрессии "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#### Подготовка текстов для модели решающего дерева и градиентного бустинга"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Для вышеупомянутых моделей используем библиотеку word2vec для векторизации текстов. Судя по первым 10 комментариям, лучше всего использовать модель, обученную на постах в твиттере."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "\n",
+    "## Обучение"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#### Модель логистической регрессии"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Подготовим pipeline для предобработки текстов с помощью TF-IDF и дальнейшего обучения модели логистической регрессии, чтобы обеспечить выбор оптимальных параметров для TF-IDF."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "RANDOM_STATE = 12345"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "metadata": {},
+   "outputs": [
+    {
+     "ename": "SyntaxError",
+     "evalue": "invalid syntax (1335835072.py, line 10)",
+     "output_type": "error",
+     "traceback": [
+      "\u001b[0;36m  File \u001b[0;32m\"/tmp/ipykernel_190/1335835072.py\"\u001b[0;36m, line \u001b[0;32m10\u001b[0m\n\u001b[0;31m    'log_reg__C': [0.00001, 0.1, 10.0, 100.0 1000.0, 100000.0],\u001b[0m\n\u001b[0m                                             ^\u001b[0m\n\u001b[0;31mSyntaxError\u001b[0m\u001b[0;31m:\u001b[0m invalid syntax\n"
+     ]
+    }
+   ],
+   "source": [
+    "log_reg_pipeline = Pipeline(\n",
+    "    steps = [('tfidf', TfidfVectorizer() ),('log_reg',LogisticRegression() )]\n",
+    ")\n",
+    "\n",
+    "log_reg_param_grid = {\n",
+    "    'tfidf__ngram_range': [(1,1), (1,2), (2,2), (1,3), (2,3)],\n",
+    "    'tfidf__analyzer': ['word', 'char', 'char_wb'],\n",
+    "    'tfidf__sublinear_tf': [False, True],\n",
+    "    'log_reg__penalty': ['l2', None],\n",
+    "    'log_reg__C': [0.00001, 0.1, 10.0, 100.0, 1000.0, 100000.0],\n",
+    "    \"log_reg__max_iter\": [10000000],\n",
+    "    \"log_reg__random_state\": [RANDOM_STATE]\n",
+    "}"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<img src=\"https://emojigraph.org/media/apple/check-mark-button_2705.png\" align=left width=33, heigth=33>\n",
+    "<div class=\"alert alert-success\">\n",
+    "🔥 Очень круто, что ты используешь пайплайн из векторайзера и модели</div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<img src=\"https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Stop_sign.png/240px-Stop_sign.png\" align=left width=35, heigth=35>\n",
+    "<div class=\"alert alert-danger\">\n",
+    "Но к сожалению в коде при перезапуске обнаружилась синтаксическая ошибка </div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<div class=\"alert\" style=\"background-color:#ead7f7;color:#8737bf\">\n",
+    "    <font size=\"3\"><b> Комментарий студента🤓</b></font>\n",
+    "   \n",
+    "УУУУПС! Исправил\n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<img src=\"https://emojigraph.org/media/apple/check-mark-button_2705.png\" align=left width=33, heigth=33>\n",
+    "<div class=\"alert alert-success\">\n",
+    "    <b>v2</b> 👍 </div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<img src=\"https://upload.wikimedia.org/wikipedia/commons/b/ba/Warning_sign_4.0.png\" align=left width=44, heigth=33>\n",
+    "<div class=\"alert alert-warning\">\n",
+    "На мой взгяд ты пытаешься исследовать очень много лишних гиперпараметров, что может  сильно усложнить процесс обучения и поиска гиперпараметров\n",
+    "\n",
+    "\n",
+    " - использование биграмм и триграмм мне кажется лишним. дело в том что уже на униграммах мы получаем около 140 тысяч признаков чего вполне достатточно для достижения хорошей метрики. на биграммах размерность признаков вырастает примерно в 15 раз до 2 миллионов, а на триграммах до 6 миллионов. Обучать модели на таких размерностях признаков очень сложно\n",
+    " - использование других методов токенизации кроме слов тоже врядли породить хорошие признаки\n",
+    " - если отказаться от биграмм и  триграмм, то оптимальный гиперпараметр с можно поискать в диапазоне 5-15.\n",
+    "    \n",
+    "Но в качестве \"первой пристрелки\" к подбору гиперпараметров такая \"работа по площадям\" может быть и нормальным первым шагом, если мы совсем ничего не знае мо данных.    \n",
+    "</div>\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<div class=\"alert\" style=\"background-color:#ead7f7;color:#8737bf\">\n",
+    "    <font size=\"3\"><b> Комментарий студента🤓</b></font>\n",
+    "   \n",
+    "Спасибо! Учту в будущем!))</div>"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "log_reg_best_model = RandomizedSearchCV(\n",
+    "    log_reg_pipeline,\n",
+    "    log_reg_param_grid,\n",
+    "    cv=5,\n",
+    "    scoring='f1',\n",
+    "    n_jobs=-1,\n",
+    "    verbose=1,\n",
+    "    random_state=RANDOM_STATE\n",
+    ")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "log_reg_best_model.fit(features_train, target_train)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "0.7796517664045893"
+      ]
+     },
+     "execution_count": 19,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "log_reg_best_model.best_score_"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<img src=\"https://emojigraph.org/media/apple/check-mark-button_2705.png\" align=left width=33, heigth=33>\n",
+    "<div class=\"alert alert-success\">\n",
+    " 👍 </div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Модель логистической регрессии показала значение метрики F1, превышающее пороговое значение (0.78)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#### Модель случайного дерева"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Гиперпараметры случайного дерева будем подбирать с помощью RandomizedSearchCV.\n",
+    "При обучении и предсказании будет использоваться корпус текстов, приведенных в векторный вид с помощью модели word2vec `glove twitter 50`."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 20,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[==================================================] 100.0% 199.5/199.5MB downloaded\n"
+     ]
+    }
+   ],
+   "source": [
+    "wv_model = api.load('glove-twitter-50')"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "words = set(wv_model.index_to_key )\n",
+    " \n",
+    "wv_corpus_train = np.array([np.array([wv_model[i] for i in ls if i in words])\n",
+    "                         for ls in features_train])\n",
+    "wv_corpus_test = np.array([np.array([wv_model[i] for i in ls if i in words])\n",
+    "                         for ls in features_test])\n",
+    "\n",
+    "\n",
+    "wv_corpus_train_avg = []\n",
+    "for v in wv_corpus_train:\n",
+    "    if v.size:\n",
+    "        wv_corpus_train_avg.append(v.mean(axis=0))\n",
+    "    else:\n",
+    "        wv_corpus_train_avg.append(np.zeros(50, dtype=float))\n",
+    "        \n",
+    "wv_corpus_test_avg = []\n",
+    "for v in wv_corpus_test:\n",
+    "    if v.size:\n",
+    "        wv_corpus_test_avg.append(v.mean(axis=0))\n",
+    "    else:\n",
+    "        wv_corpus_test_avg.append(np.zeros(50, dtype=float))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<img src=\"https://upload.wikimedia.org/wikipedia/commons/b/ba/Warning_sign_4.0.png\" align=left width=44, heigth=33>\n",
+    "<div class=\"alert alert-warning\">\n",
+    "К сожалению я не смог проверить работоспособность этого кода, т.к. при проверке локально у меня возникала ошибка, а при перезапуске на сервере ЯП код просто упал, похоже ему не хватило оперативной памяти.</div>\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<div class=\"alert\" style=\"background-color:#ead7f7;color:#8737bf\">\n",
+    "    <font size=\"3\"><b> Комментарий студента🤓</b></font>\n",
+    "   \n",
+    "Хммм, насчет ошибки странно!\n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<img src=\"https://emojigraph.org/media/apple/check-mark-button_2705.png\" align=left width=33, heigth=33>\n",
+    "<div class=\"alert alert-success\">\n",
+    "    <b>v2</b> Тут как раз ничего странного... Я часто запукаю студенческие проекты, а они любят устанавливать новые библиотеки... Соответственно мог  не уследить и в локальном окружении бибилиотеки начали отличаться от эталонных... Но раз на сервере ЯП не выскочила ошибка (а код начал выполнятся) - значит тут проблема была на мой стороне.  Я только хотел подсветить что данный код очень  требовательный до ресурсов. Возможно стоит сразу вычислять средне значение по всем словам, а не пытаться хранить в памяти вектора всех слов достаточно большого датасета. </div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<img src=\"https://emojigraph.org/media/apple/check-mark-button_2705.png\" align=left width=33, heigth=33>\n",
+    "<div class=\"alert alert-success\">\n",
+    "В целом подход, который ты попробовал имеет право на жизнь - получение эмбеддинга текста как среднее для эмбединга отдельных слов. Здесь есть те же самые недостатки, как и в подходе мешка слов - мы не учитываем порядок слов.\n",
+    "    \n",
+    "До появления трансформеров использование w2vec + рекурентных нейронных сетей это был основной подход для работы с текстами.    \n",
+    " \n",
+    "Подводя резюме: с точки зрения освоения нового инструментария в учебном проекте - все сделано круто.  Но эффективность такой подход показывает заметно ниже, чем банальный TF-IDF и  тем более трансформеры.    \n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<div class=\"alert\" style=\"background-color:#ead7f7;color:#8737bf\">\n",
+    "    <font size=\"3\"><b> Комментарий студента🤓</b></font>\n",
+    "   \n",
+    "Спасибо за совет! Да, решил попробовать векторизацию, изначально думал, что улучшит результат, но очень сильно ошибался)\n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "\n",
+    "random_forest_model = RandomForestClassifier(random_state=RANDOM_STATE)\n",
+    "\n",
+    "forest_model_params = {\n",
+    "    'n_estimators' : range(10,50,10),\n",
+    "    'max_depth' : [None] + [i for i in range(2, 7)],\n",
+    "    'min_samples_split' : range(2, 11, 5),\n",
+    "    'min_samples_leaf' : range(1,11,5),\n",
+    "    'max_features' : [1, 'sqrt', 'log2']\n",
+    "}\n",
+    "\n",
+    "best_forest_model = RandomizedSearchCV(\n",
+    "    random_forest_model,\n",
+    "    forest_model_params,\n",
+    "    n_iter=50,\n",
+    "    scoring='f1',\n",
+    "    n_jobs=-1,\n",
+    "    verbose=2,\n",
+    "    random_state=RANDOM_STATE\n",
+    ")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {
+    "scrolled": true
+   },
+   "outputs": [],
+   "source": [
+    "best_forest_model.fit(wv_corpus_train_avg, target_train)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "best_forest_model.best_score_"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Модель случайного леса на преобразованных в векторы словах показала гораздо более худший результат, чем пороговое значение и модель логистической регрессии."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#### Модель градиентного бустинга LightGBM "
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "В качестве еще одной модели рассмотрим модель градиентного бустинга LightGBM."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "lgb_model = lgb.LGBMClassifier(\n",
+    "    random_state=RANDOM_STATE\n",
+    ")\n",
+    "\n",
+    "lgb_params = {\n",
+    "    'num_leaves' : range(10,100,10),\n",
+    "    'max_depth' : range(7,15,1),\n",
+    "    'n_estimators' : range(100,1000,100),\n",
+    "}\n",
+    "\n",
+    "best_lgb_model = RandomizedSearchCV(\n",
+    "    lgb_model,\n",
+    "    lgb_params,\n",
+    "    n_iter=50,\n",
+    "    scoring='f1',\n",
+    "    n_jobs=-1,\n",
+    "    verbose=2,\n",
+    "    random_state=RANDOM_STATE\n",
+    ")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "best_lgb_model.fit(wv_corpus_train_avg, target_train)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "best_lgb_model.best_score_"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Модель градиентного бустинга LightGBM показала результат, лучший чем модель решающего дерева, но гораздо ниже логистической регрессии и порогового значения."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "#### Вывод по итогам обучения"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "По итогам обучения была выбрана модель линейной регрессии с предобработкой текстов с помощью TF-IDF.\n",
+    "Значение метрики F1 для данной связки составило 0.78, что является самой высокой из всех проанализированных моделей и превосходит пороговое значение."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Тестирование модели"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "best_model = log_reg_best_model.best_estimator_"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "predictions = best_model.predict(features_test)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": null,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "f1_log_reg = f1_score(target_test, predictions)\n",
+    "\n",
+    "print(f'Значение метрики F1 наилучшей модели для тестовой выборки составило: {f1_log_reg}')"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<img src=\"https://emojigraph.org/media/apple/check-mark-button_2705.png\" align=left width=33, heigth=33>\n",
+    "<div class=\"alert alert-success\">\n",
+    "Молодец: \n",
+    "    \n",
+    "  - выбрана лучшая модель\n",
+    "  - тестирование произведено корректно \n",
+    "  - достигнута метрика f1 выше 0,75 на тестовой выборке\n",
+    "</div>\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Выводы"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "В результате выполненной работы, лучшей моделью оказалась связка из обработки текстов с помощью TF-IDF и модели логистической регресии. Кроме нее, были рассмотрены модели случайного леса и LightGBM, обучение которых проходило на текстах, преобразованных в векторы с помощью модели, обученной на постах Твиттера.\n",
+    "\n",
+    "На тестовой выборке лучшая модель показала значение метрики F1, равное 0.79."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<img src=\"https://emojigraph.org/media/apple/check-mark-button_2705.png\" align=left width=33, heigth=33>\n",
+    "<div class=\"alert alert-success\">\n",
+    " 👍 </div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Чек-лист проверки"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "- [x]  Jupyter Notebook открыт\n",
+    "- [x]  Весь код выполняется без ошибок\n",
+    "- [x]  Ячейки с кодом расположены в порядке исполнения\n",
+    "- [x]  Данные загружены и подготовлены\n",
+    "- [x]  Модели обучены\n",
+    "- [x]  Значение метрики *F1* не меньше 0.75\n",
+    "- [x]  Выводы написаны"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<img src=\"http://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/waving-hand.png\" align=left width=44, heigth=44>\n",
+    "<div class=\"alert alert-info\">\n",
+    "<b> Заключительный комментарий</b>\n",
+    "Давай подведем итоги. В целом с проектом ты справляешься - текст предобработан, извлечены признаки и обучены классификаторы. Достигнуто требуемое значение метрики f1.\n",
+    "    \n",
+    "Классно, что ты использовал лемматизацию с помощью spaCy, а также попробовал разные способы векторизации текстов.    \n",
+    "    \n",
+    "Единственный \"критичный\" комментарий - пожалуйста исправь синтаксическую ошибку при объявлении сетки гиперпараметров.\n",
+    "\n",
+    "\n",
+    "     \n",
+    "Жду твоих исправлений :)\n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<div class=\"alert\" style=\"background-color:#ead7f7;color:#8737bf\">\n",
+    "    <font size=\"3\"><b> Комментарий студента🤓</b></font>\n",
+    "   \n",
+    "Большое спасибо за ревью! Было очень здорово узнать столько дополнительной информации, получить классные советы!\n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<img src=\"http://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/waving-hand.png\" align=left width=44, heigth=44>\n",
+    "<div class=\"alert alert-info\">\n",
+    "<b> Заключительный комментарий v2</b>\n",
+    "    \n",
+    "И тебе спасибо за обратную связь ))    \n",
+    "\n",
+    "Проект принят. Поздравляю и желаю дальнейших успехов!\n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<img src=\"http://s3.amazonaws.com/pix.iemoji.com/images/emoji/apple/ios-12/256/waving-hand.png\" align=left width=44, heigth=44>\n",
+    "<div class=\"alert alert-info\">\n",
+    "<b> рекомендации по доп. материалам</b>\n",
+    "Если решишь погрузиться в область работы с текстами, очень советую несколько продвинутых бесплатных курсов.\n",
+    "    \n",
+    "   - Отличный бесплатный курс от Школы глубокого обучения МФТИ (https://stepik.org/org/dlschool), старт курса каждые пол года. Два семестра, один по основам и компьютерному зрению, второй по обработке естественного языка. Проходить нужно именно в таком порядке,т.к. почти весь современный NLP построен на нейронках.\n",
+    "    \n",
+    "   - \"Нейронные сети и компьютерное зрение\" от Samsung Research Russia (https://stepik.org/course/50352/syllabus). Есть также продолжение по NLP.  \n",
+    "   - Трек NLP от сообщества ODS https://ods.ai/tracks/nlp-course-autumn-22\n",
+    "    \n",
+    "    \n",
+    "А если на тебя произвели впечатление возможности ChatGPT и хочешь попробовать использовать возможности больших языковых моделей для решения своих задач, могу порекомендовать следующие курсы (но к сожалению все на английском).\n",
+    "    \n",
+    "  - https://www.coursera.org/learn/generative-ai-with-llms  (можно прослужать бесплатно)\n",
+    "  - Короткие курсы на сайте https://www.deeplearning.ai/short-courses/  Самый свежак - как писать промпты, как использовать LLM для создания собственных приложений (например как создать бота на основе ChatGPT, который будет отвечать на вопросы по внутренней документации компании).  \n",
+    "  - https://www.promptingguide.ai/introduction/settings\n",
+    " \n",
+    "</div>"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "<div class=\"alert\" style=\"background-color:#ead7f7;color:#8737bf\">\n",
+    "    <font size=\"3\"><b> Комментарий студента🤓</b></font>\n",
+    "   \n",
+    "И огромное спасибо за советы! Обязательно изучу, потому что да - ChatGPT меня прям в свое время привел в восторг!)\n",
+    "</div>"
+   ]
+  }
+ ],
+ "metadata": {
+  "ExecuteTimeLog": [
+   {
+    "duration": 13821,
+    "start_time": "2023-08-24T11:04:01.400Z"
+   },
+   {
+    "duration": 6598,
+    "start_time": "2023-08-24T11:04:15.224Z"
+   },
+   {
+    "duration": 6,
+    "start_time": "2023-08-24T11:04:21.824Z"
+   },
+   {
+    "duration": 1063,
+    "start_time": "2023-08-24T11:04:21.832Z"
+   },
+   {
+    "duration": 52,
+    "start_time": "2023-08-24T11:04:22.897Z"
+   },
+   {
+    "duration": 280,
+    "start_time": "2023-08-24T11:04:22.951Z"
+   },
+   {
+    "duration": 12,
+    "start_time": "2023-08-24T11:04:23.233Z"
+   },
+   {
+    "duration": 943,
+    "start_time": "2023-08-24T11:04:23.247Z"
+   },
+   {
+    "duration": 8,
+    "start_time": "2023-08-24T11:04:24.192Z"
+   },
+   {
+    "duration": 1115126,
+    "start_time": "2023-08-24T11:04:24.203Z"
+   },
+   {
+    "duration": 11,
+    "start_time": "2023-08-24T11:22:59.332Z"
+   },
+   {
+    "duration": 5,
+    "start_time": "2023-08-24T11:22:59.345Z"
+   },
+   {
+    "duration": 48,
+    "start_time": "2023-08-24T11:22:59.367Z"
+   },
+   {
+    "duration": 3,
+    "start_time": "2023-08-24T11:22:59.417Z"
+   },
+   {
+    "duration": 138,
+    "start_time": "2023-08-24T11:22:59.422Z"
+   },
+   {
+    "duration": 0,
+    "start_time": "2023-08-24T11:22:59.562Z"
+   },
+   {
+    "duration": 0,
+    "start_time": "2023-08-24T11:22:59.564Z"
+   },
+   {
+    "duration": 0,
+    "start_time": "2023-08-24T11:22:59.566Z"
+   },
+   {
+    "duration": 0,
+    "start_time": "2023-08-24T11:22:59.570Z"
+   },
+   {
+    "duration": 0,
+    "start_time": "2023-08-24T11:22:59.573Z"
+   },
+   {
+    "duration": 0,
+    "start_time": "2023-08-24T11:22:59.575Z"
+   },
+   {
+    "duration": 0,
+    "start_time": "2023-08-24T11:22:59.576Z"
+   },
+   {
+    "duration": 0,
+    "start_time": "2023-08-24T11:22:59.577Z"
+   },
+   {
+    "duration": 0,
+    "start_time": "2023-08-24T11:22:59.580Z"
+   },
+   {
+    "duration": 0,
+    "start_time": "2023-08-24T11:22:59.581Z"
+   },
+   {
+    "duration": 0,
+    "start_time": "2023-08-24T11:22:59.582Z"
+   },
+   {
+    "duration": 0,
+    "start_time": "2023-08-24T11:22:59.584Z"
+   },
+   {
+    "duration": 0,
+    "start_time": "2023-08-24T11:22:59.584Z"
+   },
+   {
+    "duration": 0,
+    "start_time": "2023-08-24T11:22:59.585Z"
+   },
+   {
+    "duration": 6,
+    "start_time": "2023-08-24T11:25:22.353Z"
+   },
+   {
+    "duration": 3,
+    "start_time": "2023-08-24T11:25:24.229Z"
+   },
+   {
+    "duration": 1185523,
+    "start_time": "2023-08-24T11:25:29.662Z"
+   },
+   {
+    "duration": 5,
+    "start_time": "2023-08-24T11:45:15.187Z"
+   },
+   {
+    "duration": 104561,
+    "start_time": "2023-08-24T11:45:15.193Z"
+   },
+   {
+    "duration": 4815,
+    "start_time": "2023-08-24T13:16:39.492Z"
+   },
+   {
+    "duration": 5,
+    "start_time": "2023-08-24T13:17:11.734Z"
+   }
+  ],
+  "kernelspec": {
+   "display_name": "Python 3 (ipykernel)",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.9.5"
+  },
+  "toc": {
+   "base_numbering": 1,
+   "nav_menu": {},
+   "number_sections": true,
+   "sideBar": true,
+   "skip_h1_title": true,
+   "title_cell": "Содержание",
+   "title_sidebar": "Contents",
+   "toc_cell": true,
+   "toc_position": {
+    "height": "calc(100% - 180px)",
+    "left": "10px",
+    "top": "150px",
+    "width": "302.391px"
+   },
+   "toc_section_display": true,
+   "toc_window_display": false
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}
