@@ -1,5 +1,4 @@
-# DS/ML Projects
-## Projects
+# 👨🏼‍💻DS/ML Projects
 
 These projects were made during my study in Yandex.Practicum as a Data Scientist.
 
